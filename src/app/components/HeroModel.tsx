@@ -29,7 +29,7 @@ const HeroModel = (props: JSX.IntrinsicElements["group"]) => {
 
   useFrame((state, delta) => {
     if (group.current) {
-      group.current.rotation.y += delta * 0.4;
+      group.current.rotation.y += delta * 0.2;
     }
   });
 
