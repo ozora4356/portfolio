@@ -42,7 +42,7 @@ export default function Hero() {
       max: 100,
     },
     positionY: {
-      value: isMobile ? -12 : -8,
+      value: isMobile ? -12 : -4,
       min: -100,
       max: 100,
     },
@@ -52,25 +52,25 @@ export default function Hero() {
       max: 100,
     },
     rotationX: {
-      value: 0.3,
+      value: 0.25,
       min: -10,
       max: 10,
-      step: 0.1,
+      step: 0.01,
     },
     rotationY: {
       value: -1.8,
       min: -10,
       max: 10,
-      step: 0.1,
+      step: 0.01,
     },
     rotationZ: {
       value: 0,
       min: -10,
       max: 10,
-      step: 0.1,
+      step: 0.01,
     },
     scale: {
-      value: isMobile ? 4 : 4.8,
+      value: isMobile ? 4 : 4,
       min: 0,
       max: 10,
       step: 0.01,
@@ -79,7 +79,7 @@ export default function Hero() {
 
   return (
     <section className="min-h-screen w-full flex flex-col relative">
-      <div className="md:w-full mt-[20vh] md:mt-[30vh] max-w-6xl mx-4 md:mx-auto">
+      <div className="md:w-full mt-[20vh] md:mt-[30vh] max-w-7xl mx-4 md:mx-auto">
         <div className="w-fit mx-auto md:mx-0">
           <p className="text-white text-center md:text-2xl text-base font-medium">
             Welcome to my portfolio
@@ -89,7 +89,7 @@ export default function Hero() {
           </h1>
         </div>
       </div>
-      <div className="w-full h-full absolute inset-0">
+      <div className="w-full h-[120vh] absolute inset-0">
         <Leva />
         <Canvas>
           <Suspense fallback={<CanvasLoader />}>

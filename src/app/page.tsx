@@ -8,6 +8,7 @@ export default function Home() {
     <main className="bg-gray-900">
       {/* <Navbar /> */}
       <Hero />
+      <section className="h-screen"></section>
     </main>
   );
 }
