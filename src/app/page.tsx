@@ -5,10 +5,12 @@ import Hero from "./sections/Hero";
 
 export default function Home() {
   return (
-    <main className="bg-gray-900">
+    <main className="bg-[#111]">
       {/* <Navbar /> */}
       <Hero />
-      <section className="h-screen"></section>
+      <section className="h-screen">
+
+      </section>
     </main>
   );
 }
