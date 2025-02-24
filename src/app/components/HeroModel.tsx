@@ -1,9 +1,21 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { Group, Mesh, SkinnedMesh, Material } from "three";
 import { GLTF } from "three-stdlib";
 import { JSX } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
+import * as THREE from "three";
+
+const VIEWPORT_BREAKPOINTS = {
+  MOBILE: 10, // モバイルブレイクポイント
+} as const;
+
+const ROTATION_LIMITS = {
+  MIN: -Math.PI / 3,
+  MAX: 0,
+} as const;
+
+const ROTATION_SPEED = 0.2;
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -16,6 +28,9 @@ type GLTFResult = GLTF & {
 
 const HeroModel = (props: JSX.IntrinsicElements["group"]) => {
   const group = useRef<Group>(null);
+  const { viewport } = useThree();
+  const rotationRef = useRef(1); // useState を useRef に変更
+
   const { nodes, materials, animations } = useGLTF(
     "/models/Hero/scene.gltf"
   ) as GLTFResult;
@@ -28,8 +43,24 @@ const HeroModel = (props: JSX.IntrinsicElements["group"]) => {
   }, [actions]);
 
   useFrame((state, delta) => {
-    if (group.current) {
-      group.current.rotation.y += delta * 0.2;
+    if (group.current && viewport.width >= VIEWPORT_BREAKPOINTS.MOBILE) {
+      const currentRotation = group.current.rotation.y;
+
+      // 回転方向を判定
+      if (currentRotation >= ROTATION_LIMITS.MAX) {
+        rotationRef.current = -1;
+      } else if (currentRotation <= ROTATION_LIMITS.MIN) {
+        rotationRef.current = 1;
+      }
+
+      // 回転を適用
+      group.current.rotation.y += delta * ROTATION_SPEED * rotationRef.current;
+
+      // 回転角度を制限値内に強制的に収める
+      group.current.rotation.y = Math.max(
+        ROTATION_LIMITS.MIN,
+        Math.min(ROTATION_LIMITS.MAX, group.current.rotation.y)
+      );
     }
   });
 
@@ -1287,9 +1318,9 @@ const HeroModel = (props: JSX.IntrinsicElements["group"]) => {
           </group>
           <skinnedMesh
             name="Object_8"
-            geometry={nodes.Object_8.geometry}
+            geometry={(nodes.Object_8 as THREE.SkinnedMesh).geometry}
             material={materials.tools_f}
-            skeleton={nodes.Object_8.skeleton}
+            skeleton={(nodes.Object_8 as THREE.SkinnedMesh).skeleton}
           />
         </group>
       </group>
