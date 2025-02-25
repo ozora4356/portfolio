@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { Group, Mesh, SkinnedMesh, Material } from "three";
 import { GLTF } from "three-stdlib";
@@ -15,7 +15,7 @@ const ROTATION_LIMITS = {
   MAX: 0,
 } as const;
 
-const ROTATION_SPEED = 0.2;
+const ROTATION_SPEED = 0.1;
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -165,7 +165,7 @@ const HeroModel = (props: JSX.IntrinsicElements["group"]) => {
                     material={materials.furnace_f}
                   />
                 </group>
-                <group
+                {/* <group
                   name="candles"
                   position={[163.78, -108.021, -104.002]}
                   rotation={[0, 0, -Math.PI / 2]}
@@ -178,7 +178,7 @@ const HeroModel = (props: JSX.IntrinsicElements["group"]) => {
                     geometry={nodes.candles_flame_0.geometry}
                     material={materials.flame}
                   />
-                </group>
+                </group> */}
                 <group
                   name="particle000"
                   position={[177.17, 124.264, 144.038]}
