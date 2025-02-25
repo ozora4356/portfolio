@@ -14,7 +14,7 @@ const CanvasLoader = () => {
         justifyContent: "center",
       }}
     >
-      <ScaleLoader color="#f1f1f1" width={4} />
+      <ScaleLoader color="#f1f1f1" width={4} height={50} />
     </Html>
   );
 };

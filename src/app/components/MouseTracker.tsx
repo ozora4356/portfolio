@@ -27,7 +27,7 @@ const MouseTracker = () => {
       transition={{
         type: "spring",
         damping: 10,
-        stiffness: 200,
+        stiffness: 150,
         mass: 0.1,
       }}
     />

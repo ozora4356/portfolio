@@ -5,7 +5,7 @@ import Link from "next/link";
 const WorksSection = styled.section`
   position: relative;
   max-width: 1464px;
-  padding: 128px 32px;
+  padding: 160px 32px;
   margin: 0 auto;
 `;
 
@@ -20,7 +20,7 @@ const WorksSectionLayout = styled.div`
 
 const WorksSectionSticky = styled.div`
   position: sticky;
-  top: 22%;
+  top: 20%;
   display: flex;
   flex-direction: column;
   align-items: space-between;
@@ -31,11 +31,11 @@ const WorksSectionSticky = styled.div`
 const Title = styled.h2`
   color: white;
   width: fit-content;
-  line-height: 0.8;
+  line-height: 0.9;
   font-size: 80px;
   font-weight: 700;
   border-left: 4px solid var(--main-site-color);
-  padding-left: 24px;
+  padding: 16px 32px;
 `;
 
 const WorkList = styled.ul`
@@ -116,7 +116,7 @@ export default function works() {
               </Thumbnail>
               <Description>
                 <h3>Vtuber Lives App</h3>
-                <p>Vtuber Lives App</p>
+                <p>React.js / Next.js / TypeScript / TailwindCSS / Vercel</p>
               </Description>
             </Link>
           </WorkItem>
@@ -134,7 +134,7 @@ export default function works() {
               </Thumbnail>
               <Description>
                 <h3>Mbti Compatibility App</h3>
-                <p>Mbti Compatibility App</p>
+                <p>React.js / Next.js / TypeScript / TailwindCSS / Vercel</p>
               </Description>
             </Link>
           </WorkItem>
@@ -152,7 +152,7 @@ export default function works() {
               </Thumbnail>
               <Description>
                 <h3>X Command App</h3>
-                <p>X Command App</p>
+                <p>React.js / Next.js / TypeScript / TailwindCSS / Vercel</p>
               </Description>
             </Link>
           </WorkItem>
