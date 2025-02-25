@@ -2,24 +2,34 @@
 
 import styled from "@emotion/styled";
 import Hero from "./sections/Hero";
-import About from "./sections/About";
+import Works from "./sections/Works";
+import { useEffect } from "react";
+import Lenis from "@studio-freight/lenis";
 
 const Main = styled.main`
   background-color: #111111;
 `;
 
-const MainBackground = styled.div`
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(100% 100% at 100% 5%, rgba(150, 150, 150, .2) 0%, transparent 100%), #111;
-`;
-
 export default function Home() {
+  useEffect(() => {
+    const lenis = new Lenis({});
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <Main>
-      <MainBackground />
       <Hero />
-      <About />
+      <Works />
     </Main>
   );
 }
