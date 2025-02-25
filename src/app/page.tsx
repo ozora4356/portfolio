@@ -5,6 +5,8 @@ import Hero from "./sections/Hero";
 import Works from "./sections/Works";
 import { useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
+import About from "./sections/About";
+import MouseTracker from "./components/MouseTracker";
 
 const Main = styled.main`
   background-color: #111111;
@@ -28,8 +30,10 @@ export default function Home() {
 
   return (
     <Main>
+      <MouseTracker />
       <Hero />
       <Works />
+      <About />
     </Main>
   );
 }
