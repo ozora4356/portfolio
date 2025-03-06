@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
 import About from "./sections/About";
 import MouseTracker from "./components/MouseTracker";
+import Footer from "./sections/Footer";
 
 const Main = styled.main`
   background-color: #111111;
@@ -34,6 +35,7 @@ export default function Home() {
       <Hero />
       <Works />
       <About />
+      <Footer />
     </Main>
   );
 }

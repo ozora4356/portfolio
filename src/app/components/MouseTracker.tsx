@@ -17,7 +17,6 @@ const Cursor = styled(motion.div)`
 
 const MouseTracker = () => {
   const { x, y } = useMousePosition();
-
   return (
     <Cursor
       animate={{

@@ -4,6 +4,9 @@ import Link from "next/link";
 
 const WorksSection = styled.section`
   position: relative;
+`;
+
+const WorksSectionWrapper = styled.div`
   max-width: 1464px;
   padding: 160px 32px;
   margin: 0 auto;
@@ -20,7 +23,7 @@ const WorksSectionLayout = styled.div`
 
 const WorksSectionSticky = styled.div`
   position: sticky;
-  top: 20%;
+  top: 12%;
   display: flex;
   flex-direction: column;
   align-items: space-between;
@@ -91,73 +94,75 @@ const Description = styled.div`
 export default function works() {
   return (
     <WorksSection id="works">
-      <WorksSectionLayout>
-        <WorksSectionSticky>
-          <Title>
-            WORKS
-            <br />
-            CREATED
-            <br />
-            REACT
-          </Title>
-        </WorksSectionSticky>
-        <WorkList>
-          <WorkItem>
-            <Link
-              href="https://v-live-pi.vercel.app/"
-              target="_blank"
-            >
-              <Thumbnail>
-                <Image
-                  src="https://v-live-pi.vercel.app/og-image.png"
-                  alt="Vtuber Lives App"
-                  fill
-                />
-              </Thumbnail>
-              <Description>
-                <h3>Vtuber Lives App</h3>
-                <p>React.js / Next.js / TypeScript / TailwindCSS / Vercel</p>
-              </Description>
-            </Link>
-          </WorkItem>
-          <WorkItem>
-            <Link
-              href="https://mbti-sage-eight.vercel.app/"
-              target="_blank"
-            >
-              <Thumbnail>
-                <Image
-                  src="https://mbti-sage-eight.vercel.app/ogp.png"
-                  alt="Mbti Compatibility App"
-                  fill
-                />
-              </Thumbnail>
-              <Description>
-                <h3>Mbti Compatibility App</h3>
-                <p>React.js / Next.js / TypeScript / TailwindCSS / Vercel</p>
-              </Description>
-            </Link>
-          </WorkItem>
-          <WorkItem>
-            <Link
-              href="https://command-app.vercel.app/"
-              target="_blank"
-            >
-              <Thumbnail>
-                <Image
-                  src="https://command-app.vercel.app/logo-white.png"
-                  alt="X Command App"
-                  fill
-                />
-              </Thumbnail>
-              <Description>
-                <h3>X Command App</h3>
-                <p>React.js / Next.js / TypeScript / TailwindCSS / Vercel</p>
-              </Description>
-            </Link>
-          </WorkItem>
-        </WorkList>
-      </WorksSectionLayout>
+      <WorksSectionWrapper>
+        <WorksSectionLayout>
+          <WorksSectionSticky>
+            <Title>
+              WORKS
+              <br />
+              CREATED
+              <br />
+              REACT
+            </Title>
+          </WorksSectionSticky>
+          <WorkList>
+            <WorkItem>
+              <Link
+                href="https://v-live-pi.vercel.app/"
+                target="_blank"
+              >
+                <Thumbnail>
+                  <Image
+                    src="https://v-live-pi.vercel.app/og-image.png"
+                    alt="Vtuber Lives App"
+                    fill
+                  />
+                </Thumbnail>
+                <Description>
+                  <h3>Vtuber Lives App</h3>
+                  <p>React.js / Next.js / TypeScript / TailwindCSS / Vercel</p>
+                </Description>
+              </Link>
+            </WorkItem>
+            <WorkItem>
+              <Link
+                href="https://mbti-sage-eight.vercel.app/"
+                target="_blank"
+              >
+                <Thumbnail>
+                  <Image
+                    src="https://mbti-sage-eight.vercel.app/ogp.png"
+                    alt="Mbti Compatibility App"
+                    fill
+                  />
+                </Thumbnail>
+                <Description>
+                  <h3>Mbti Compatibility App</h3>
+                  <p>React.js / Next.js / TypeScript / TailwindCSS / Vercel</p>
+                </Description>
+              </Link>
+            </WorkItem>
+            <WorkItem>
+              <Link
+                href="https://command-app.vercel.app/"
+                target="_blank"
+              >
+                <Thumbnail>
+                  <Image
+                    src="https://command-app.vercel.app/logo-white.png"
+                    alt="X Command App"
+                    fill
+                  />
+                </Thumbnail>
+                <Description>
+                  <h3>X Command App</h3>
+                  <p>React.js / Next.js / TypeScript / TailwindCSS / Vercel</p>
+                </Description>
+              </Link>
+            </WorkItem>
+          </WorkList>
+        </WorksSectionLayout>
+      </WorksSectionWrapper>
     </WorksSection>
   );
 }
