@@ -12,7 +12,7 @@ const poppins = Poppins({
 const HeroBackGround = styled.div`
   position: absolute;
   inset: 0;
-  background: radial-gradient(100% 100% at 100% 5%, rgba(114, 164, 127, 0.2) 0%, transparent 100%), #111;
+  background: radial-gradient(100% 100% at 100% 5%, rgba(175, 159, 255, 0.2) 0%, transparent 100%), #111;
 `;
 
 const HeroSection = styled.section`
