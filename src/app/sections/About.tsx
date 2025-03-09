@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 const AboutSection = styled.section`
   position: relative;
@@ -20,26 +20,6 @@ const AboutSectionLayout = styled.div`
   justify-content: space-between;
 `;
 
-const AboutSectionSticky = styled.div`
-  position: sticky;
-  top: 12%;
-  display: flex;
-  flex-direction: column;
-  align-items: space-between;
-  align-self: start;
-  margin-top: 100px;
-`;
-
-const Title = styled.h2`
-  color: white;
-  width: fit-content;
-  line-height: 0.9;
-  font-size: 80px;
-  font-weight: 700;
-  border-left: 4px solid var(--main-site-color);
-  padding: 16px 32px;
-`;
-
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -48,22 +28,34 @@ const ContentContainer = styled.div`
 
 const SubContainer = styled.div``;
 
+const AnimatedContainer = styled.div<{ isVisible: boolean }>`
+  transform-origin: center top;
+  transform: rotate3d(
+    1,
+    0,
+    0,
+    ${(props) => (props.isVisible ? "0deg" : "-90deg")}
+  );
+  transition: transform 2000ms cubic-bezier(0.19, 1, 0.22, 1);
+  opacity: ${(props) => (props.isVisible ? 1 : 0)};
+  transition-property: transform, opacity;
+`;
+
 const Description = styled.div`
   color: white;
   font-size: 16px;
-  font-weight: 500;
-  line-height: 1.6;
+  line-height: 1.8;
+  margin-bottom: 40px;
+
   > p {
-    &:nth-child(n+2) {
-      margin-top: 1em;
-    }
+    margin-bottom: 1em;
   }
 `;
 
 const SubTitle = styled.h3`
-  color: #fff;
+  color: white;
   font-size: 32px;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 24px;
 `;
 
@@ -78,33 +70,63 @@ const SkillsList = styled.ul`
 
 const SkillItem = styled.li`
   color: white;
-  padding: 8px 16px;
-  font-size: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
+  padding: 6px 8px;
+  font-size: 14px;
+  border: 1px #666 solid;
+  transition: all 0.5s ease;
 `;
 
 export default function About() {
+  const [isVisible, setIsVisible] = useState(false);
+  const aboutContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      {
+        threshold: 1,
+      }
+    );
+
+    if (aboutContainerRef.current) {
+      observer.observe(aboutContainerRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <AboutSection id="about">
       <AboutSectionWrapper>
         <AboutSectionLayout>
-          <AboutSectionSticky>
-            <Title>
-              About
-              <br />
-              Me
-            </Title>
-          </AboutSectionSticky>
-
-          <ContentContainer>
+          <AnimatedContainer
+            ref={aboutContainerRef}
+            isVisible={isVisible}
+          >
             <SubContainer>
               <SubTitle>About</SubTitle>
               <Description>
-                <p>様々な企業のプロモーションやブランディングに伴うWebサイト制作・リニューアル、アプリケーション開発、LP制作・改修から運用・保守まで幅広く対応してきました。</p>
-                <p>WordPressテーマ開発を中心とした3年半の実務経験の中で、フロントエンド技術の変遷に合わせて自身のスキルセットを継続的に拡大。</p>
-                <p>初期はjQueryやgulp.jsを活用したサイト構築から始まり、その後VueやTailwindCSS、Viteなどのモダンフレームワークやビルドツールを実務に取り入れてきました。</p>
-                <p>プロセス全体をスムーズに進行できるように、担当範囲の業務に縛られることなく、ディレクターやデザイナーと密に連携し、各工程の背景情報を積極的に取りに行くことを心がけています。</p>
+                <p>
+                  様々な企業のプロモーションやブランディングに伴うWebサイト制作・リニューアル、アプリケーション開発、LP制作・改修から運用・保守まで幅広く対応してきました。
+                </p>
+                <p>
+                  WordPressテーマ開発を中心とした3年半の実務経験の中で、フロントエンド技術の変遷に合わせて自身のスキルセットを継続的に拡大。
+                </p>
+                <p>
+                  初期はjQueryやgulp.jsを活用したサイト構築から始まり、その後VueやTailwindCSS、Viteなどのモダンフレームワークやビルドツールを実務に取り入れてきました。
+                </p>
+                <p>
+                  プロセス全体をスムーズに進行できるように、担当範囲の業務に縛られることなく、ディレクターやデザイナーと密に連携し、各工程の背景情報を取りに行くことを心がけています。
+                </p>
               </Description>
             </SubContainer>
 
@@ -125,7 +147,7 @@ export default function About() {
                 <SkillItem>XD</SkillItem>
               </SkillsList>
             </SubContainer>
-          </ContentContainer>
+          </AnimatedContainer>
         </AboutSectionLayout>
       </AboutSectionWrapper>
     </AboutSection>

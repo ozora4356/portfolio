@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef, useEffect, useState } from "react";
 
 const WorksSection = styled.section`
   position: relative;
@@ -39,6 +40,26 @@ const Title = styled.h2`
   font-weight: 700;
   border-left: 4px solid var(--main-site-color);
   padding: 16px 32px;
+`;
+
+// マスクアニメーション付きのテキストコンポーネント
+const TitleText = styled.span<{ isVisible: boolean; delay?: number }>`
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #111;
+    transform: translateY(${(props) => (props.isVisible ? "100%" : "0")});
+    transition: transform 1000ms cubic-bezier(0.19, 1, 0.22, 1)
+      ${(props) => props.delay || 0}ms;
+  }
 `;
 
 const WorkList = styled.ul`
@@ -91,18 +112,60 @@ const Description = styled.div`
   }
 `;
 
-export default function works() {
+export default function Works() {
+  const [isVisible, setIsVisible] = useState(false);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect(); // 一度表示されたら監視を停止
+          }
+        });
+      },
+      {
+        threshold: 0.3, // 30%が表示されたらトリガー
+      }
+    );
+
+    if (titleRef.current) {
+      observer.observe(titleRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <WorksSection id="works">
       <WorksSectionWrapper>
         <WorksSectionLayout>
           <WorksSectionSticky>
-            <Title>
-              WORKS
+            <Title ref={titleRef}>
+              <TitleText
+                isVisible={isVisible}
+                delay={0}
+              >
+                WORKS
+              </TitleText>
               <br />
-              CREATED
+              <TitleText
+                isVisible={isVisible}
+                delay={100}
+              >
+                CREATED
+              </TitleText>
               <br />
-              REACT
+              <TitleText
+                isVisible={isVisible}
+                delay={200}
+              >
+                REACT
+              </TitleText>
             </Title>
           </WorksSectionSticky>
           <WorkList>
@@ -116,11 +179,12 @@ export default function works() {
                     src="https://v-live-pi.vercel.app/og-image.png"
                     alt="Vtuber Lives App"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </Thumbnail>
                 <Description>
                   <h3>Vtuber Lives App</h3>
-                  <p>React.js / Next.js / TypeScript / TailwindCSS / Vercel</p>
+                  <p>Vtuberのライブ配信情報を一覧で確認できるアプリ</p>
                 </Description>
               </Link>
             </WorkItem>
@@ -134,6 +198,7 @@ export default function works() {
                     src="https://mbti-sage-eight.vercel.app/ogp.png"
                     alt="Mbti Compatibility App"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </Thumbnail>
                 <Description>
@@ -152,6 +217,7 @@ export default function works() {
                     src="https://command-app.vercel.app/logo-white.png"
                     alt="X Command App"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </Thumbnail>
                 <Description>
