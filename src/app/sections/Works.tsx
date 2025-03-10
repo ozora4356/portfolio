@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import Image from "next/image";
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
+import { ThreeImage } from "../components/ThreeImage";
 
 const WorksSection = styled.section`
   position: relative;
@@ -74,25 +74,20 @@ const WorkItem = styled.li`
   width: 100%;
   flex-direction: column;
   gap: 16px;
-  @media (any-hover: hover) {
-    &:hover {
-      img {
-        transform: translate(-6px, -6px);
-      }
-    }
-  }
 `;
 
 const Thumbnail = styled.div`
   position: relative;
   width: 100%;
   aspect-ratio: 16/9;
-  background-color: var(--main-site-color);
-  img {
-    width: 100%;
-    height: 100%;
+  overflow: hidden;
+  transition: all ease 0.5s;
+
+  canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
     object-fit: cover;
-    transition: transform 0.3s ease;
   }
 `;
 
@@ -175,11 +170,9 @@ export default function Works() {
                 target="_blank"
               >
                 <Thumbnail>
-                  <Image
+                  <ThreeImage
                     src="https://v-live-pi.vercel.app/og-image.png"
                     alt="Vtuber Lives App"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </Thumbnail>
                 <Description>
@@ -194,11 +187,9 @@ export default function Works() {
                 target="_blank"
               >
                 <Thumbnail>
-                  <Image
+                  <ThreeImage
                     src="https://mbti-sage-eight.vercel.app/ogp.png"
                     alt="Mbti Compatibility App"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </Thumbnail>
                 <Description>
@@ -213,11 +204,9 @@ export default function Works() {
                 target="_blank"
               >
                 <Thumbnail>
-                  <Image
+                  <ThreeImage
                     src="https://command-app.vercel.app/logo-white.png"
                     alt="X Command App"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </Thumbnail>
                 <Description>
