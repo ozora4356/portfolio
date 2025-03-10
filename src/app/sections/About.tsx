@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import React, { useRef, useEffect, useState } from "react";
+import AboutExperience from "../components/AboutExperience";
 
 const AboutSection = styled.section`
   position: relative;
@@ -12,21 +13,19 @@ const AboutSectionWrapper = styled.div`
 `;
 
 const AboutSectionLayout = styled.div`
-  display: grid;
+  display: flex;
   position: relative;
-  grid-template-columns: auto 50%;
   /* column-gap: 200px;  */
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
 `;
 
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-`;
-
 const SubContainer = styled.div``;
+
+const AboutExperienceContainer = styled.div`
+  width: 100%;
+  height: 700px;
+`;
 
 const AnimatedContainer = styled.div<{ isVisible: boolean }>`
   transform-origin: center top;
@@ -36,6 +35,7 @@ const AnimatedContainer = styled.div<{ isVisible: boolean }>`
     0,
     ${(props) => (props.isVisible ? "0deg" : "-90deg")}
   );
+  width: 100%;
   transition: transform 2000ms cubic-bezier(0.19, 1, 0.22, 1);
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   transition-property: transform, opacity;
@@ -148,6 +148,9 @@ export default function About() {
               </SkillsList>
             </SubContainer>
           </AnimatedContainer>
+          <AboutExperienceContainer>
+            <AboutExperience />
+          </AboutExperienceContainer>
         </AboutSectionLayout>
       </AboutSectionWrapper>
     </AboutSection>
