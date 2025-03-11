@@ -1,18 +1,106 @@
 import styled from "@emotion/styled";
-import React from "react";
+import { useEffect, useRef } from "react";
+import { InstancedMouseEffect } from "../lib/three/InstancedMouseEffect";
 
 const FooterSection = styled.section`
   width: 100%;
-  padding: 160px 32px;
+  padding: 0;
   margin: 0 auto;
   position: relative;
-  height: 100vh; 
+  height: 80vh;
+  overflow: hidden;
+  cursor: pointer;
+`;
+
+const CanvasWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  #canvas-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+    pointer-events: auto;
+  }
+`;
+
+const ContentWrapper = styled.div`
+  position: absolute;
+  right: 80px;
+  bottom: 80px;
+  z-index: 1;
+  color: #d8d8d8;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  cursor: pointer;
+  p {
+    font-size: 80px;
+    line-height: 1;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: var(--main-site-font);
+  }
 `;
 
 const Footer = () => {
-  return (
-    <FooterSection>
+  const effectRef = useRef<InstancedMouseEffect | null>(null);
 
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const effect = new InstancedMouseEffect({
+      speed: 1,
+      frequency: 1,
+      mouseSize: 0.75,
+      rotationSpeed: 1,
+      rotationAmmount: 0,
+      mouseScaling: 0.5,
+      mouseIndent: window.innerWidth < 768 ? 0 : 1,
+      color: "#249124",
+      shape: "square",
+    });
+
+    effectRef.current = effect;
+
+    const canvas = document.getElementById("canvas");
+    canvas?.addEventListener("click", handleScrollToTop);
+
+    return () => {
+      if (effectRef.current?.rendering) {
+        effectRef.current.rendering.dispose();
+      }
+      canvas?.removeEventListener("click", handleScrollToTop);
+    };
+  }, []);
+
+  return (
+    <FooterSection onClick={handleScrollToTop}>
+      <CanvasWrapper>
+        <div id="canvas-wrapper">
+          <canvas id="canvas" />
+        </div>
+      </CanvasWrapper>
+      <ContentWrapper>
+        <p>Back to Top</p>
+      </ContentWrapper>
     </FooterSection>
   );
 };
