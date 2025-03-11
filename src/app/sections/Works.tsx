@@ -33,6 +33,7 @@ const WorksSectionSticky = styled.div`
 `;
 
 const Title = styled.h2`
+  font-family: var(--main-site-font);
   color: white;
   width: fit-content;
   line-height: 0.9;
@@ -95,7 +96,7 @@ const Description = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: 16px;
+  margin-top: 24px;
   h3 {
     font-size: 20px;
     font-weight: 500;
@@ -150,14 +151,14 @@ export default function Works() {
               <br />
               <TitleText
                 isVisible={isVisible}
-                delay={100}
+                delay={200}
               >
                 CREATED
               </TitleText>
               <br />
               <TitleText
                 isVisible={isVisible}
-                delay={200}
+                delay={400}
               >
                 REACT
               </TitleText>
@@ -177,7 +178,7 @@ export default function Works() {
                 </Thumbnail>
                 <Description>
                   <h3>Vtuber Lives App</h3>
-                  <p>Vtuberのライブ配信情報を一覧で確認できるアプリ</p>
+                  <p>React.js / Next.js / TypeScript / TailwindCSS / Vercel</p>
                 </Description>
               </Link>
             </WorkItem>
