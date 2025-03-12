@@ -1,4 +1,4 @@
-import { EffectComposer, RenderPass } from "postprocessing";
+import { EffectComposer, RenderPass, Pass } from "postprocessing";
 import * as THREE from "three";
 import { N8AOPostPass } from "n8ao";
 
@@ -91,7 +91,7 @@ export class Rendering {
       n8aopass.setQualityMode("Medium");
       n8aopass.screenSpaceRadius = true;
 
-      composer.addPass(n8aopass);
+      composer.addPass(n8aopass as unknown as Pass);
       this.composer = composer;
     }
 
