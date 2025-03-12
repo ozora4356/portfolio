@@ -37,8 +37,8 @@ const Scene = () => {
     switch (viewportSize) {
       case "mobile":
         return {
-          scale: 1,
-          position: [-20, -40, 0] as [number, number, number],
+          scale: 1.2,
+          position: [-20, -60, 0] as [number, number, number],
         };
 
       case "tablet":

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Fujisaki Ozora Portfolio',
     description: '2025 Fujisaki Ozora Portfolio',
-    url: '',
+    url: 'https://fujisaki-portfolio.vercel.app',
     siteName: 'Fujisaki Ozora Portfolio',
     images: [
       {
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Fujisaki Ozora Portfolio',
     description: '2025 Fujisaki Ozora Portfolio',
-    images: [''],
+    images: ['https://fujisaki-portfolio.vercel.app/images/og-image.png'],
   },
 };
 
