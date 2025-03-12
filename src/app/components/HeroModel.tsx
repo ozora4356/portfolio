@@ -3,9 +3,8 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import { Group, Mesh, SkinnedMesh, Material } from "three";
 import { GLTF } from "three-stdlib";
 import { JSX } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-
 
 const ROTATION_LIMITS = {
   MIN: -Math.PI / 3,
