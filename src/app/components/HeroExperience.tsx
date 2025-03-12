@@ -19,7 +19,9 @@ const Scene = () => {
     setScreenWidth(window.innerWidth);
 
     const handleResize = () => {
-      setScreenWidth(window.innerWidth);
+      requestAnimationFrame(() => {
+        setScreenWidth(window.innerWidth);
+      });
     };
 
     window.addEventListener("resize", handleResize);

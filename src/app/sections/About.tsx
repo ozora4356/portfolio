@@ -43,7 +43,8 @@ const AboutExperienceContainer = styled.div`
   }
   @media screen and (max-width: 767px) {
     width: 100%;
-    height: 60vw;
+    height: 70vw;
+    margin-top: 60px;
   }
 `;
 
@@ -91,7 +92,6 @@ const SkillsList = styled.ul`
   gap: 12px;
   list-style: none;
   padding: 0;
-  margin-bottom: 30px;
 `;
 
 const SkillItem = styled.li`
