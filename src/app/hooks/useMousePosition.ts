@@ -27,19 +27,23 @@ export const useMousePosition = () => {
     // リサイズ時のチェック
     window.addEventListener("resize", checkMobile);
 
-    const handleMouseMove = (event: MouseEvent) => {
-      if (!isMobile) {
+    // スマホでない場合のみマウスイベントを設定
+    let mouseMoveHandler: ((event: MouseEvent) => void) | null = null;
+
+    if (!isMobile) {
+      mouseMoveHandler = (event: MouseEvent) => {
         setMousePosition({
           x: (event.clientX / window.innerWidth) * 2 - 1,
           y: -(event.clientY / window.innerHeight) * 2 + 1,
         });
-      }
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
+      };
+      window.addEventListener("mousemove", mouseMoveHandler);
+    }
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      if (mouseMoveHandler) {
+        window.removeEventListener("mousemove", mouseMoveHandler);
+      }
       window.removeEventListener("resize", checkMobile);
     };
   }, [isMobile]);

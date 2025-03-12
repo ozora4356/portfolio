@@ -14,6 +14,9 @@ const Cursor = styled(motion.div)`
   pointer-events: none;
   z-index: 9999;
   opacity: 0.6;
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 `;
 
 const MouseTracker = () => {
