@@ -1,23 +1,36 @@
 "use client";
 
 import { PerspectiveCamera, PresentationControls } from "@react-three/drei";
-import { Suspense, useMemo } from "react";
+import { Suspense, useMemo, useState, useEffect } from "react";
 import AboutModel from "../components/AboutModel";
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import CanvasLoader from "./CanvasLoader";
 
-const VIEWPORT_BREAKPOINTS = {
-  MOBILE: 10,
-  TABLET: 15,
+const BREAKPOINTS = {
+  MOBILE: 768, // モバイル用ブレークポイント
+  TABLET: 1024, // タブレット用ブレークポイント
 } as const;
 
 const Scene = () => {
-  const { viewport } = useThree();
+  const [screenWidth, setScreenWidth] = useState(0);
+
+  useEffect(() => {
+    // 初期値の設定
+    setScreenWidth(window.innerWidth);
+
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const modelProps = useMemo(() => {
     const viewportSize =
-      viewport.width < VIEWPORT_BREAKPOINTS.MOBILE
+      screenWidth < BREAKPOINTS.MOBILE
         ? "mobile"
-        : viewport.width < VIEWPORT_BREAKPOINTS.TABLET
+        : screenWidth < BREAKPOINTS.TABLET
         ? "tablet"
         : "desktop";
 
@@ -25,29 +38,29 @@ const Scene = () => {
       case "mobile":
         return {
           scale: 1,
-          position: [0, -2.5, 0] as [number, number, number],
+          position: [-20, -40, 0] as [number, number, number],
         };
 
       case "tablet":
         return {
-          scale: 1.2,
-          position: [-2, -2, 0] as [number, number, number],
+          scale: 0.9,
+          position: [-40, 0, 0] as [number, number, number],
         };
 
       case "desktop":
       default:
         return {
           scale: 1,
-          position: [0, 0, 0] as [number, number, number],
+          position: [-50, 0, 0] as [number, number, number],
         };
     }
-  }, [viewport.width]);
+  }, [screenWidth]);
 
   return (
     <>
       <PerspectiveCamera
         makeDefault
-        position={[0, 140, 760]}
+        position={[0, 140, 800]}
       />
       <PresentationControls
         global
@@ -62,7 +75,7 @@ const Scene = () => {
           scale={modelProps.scale}
           position={modelProps.position}
           rotation={[-Math.PI, -1.1, 0]}
-          />
+        />
       </PresentationControls>
       <ambientLight intensity={0.6} />
       <directionalLight
@@ -75,7 +88,13 @@ const Scene = () => {
 
 const AboutExperience = () => {
   return (
-    <Canvas>
+    <Canvas
+      camera={{ position: [0, 140, 800], fov: 75 }}
+      style={{
+        width: "100%",
+        height: "100%",
+      }}
+    >
       <Suspense fallback={<CanvasLoader />}>
         <Scene />
       </Suspense>

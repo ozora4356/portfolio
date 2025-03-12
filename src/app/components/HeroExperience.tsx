@@ -1,24 +1,36 @@
 "use client";
 
 import { PerspectiveCamera, Text } from "@react-three/drei";
-import { Suspense, useMemo } from "react";
+import { Suspense, useMemo, useState, useEffect } from "react";
 import HeroModel from "../components/HeroModel";
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import CanvasLoader from "./CanvasLoader";
 
-const VIEWPORT_BREAKPOINTS = {
-  MOBILE: 10,
-  TABLET: 15,
+const BREAKPOINTS = {
+  MOBILE: 768, // モバイル用ブレークポイント
+  TABLET: 1024, // タブレット用ブレークポイント
 } as const;
 
 const Scene = () => {
-  const { viewport } = useThree();
+  const [screenWidth, setScreenWidth] = useState(0);
+
+  useEffect(() => {
+    // 初期値の設定
+    setScreenWidth(window.innerWidth);
+
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const textProps = useMemo(() => {
     const viewportSize =
-      viewport.width < VIEWPORT_BREAKPOINTS.MOBILE
+      screenWidth < BREAKPOINTS.MOBILE
         ? "mobile"
-        : viewport.width < VIEWPORT_BREAKPOINTS.TABLET
+        : screenWidth < BREAKPOINTS.TABLET
         ? "tablet"
         : "desktop";
 
@@ -40,18 +52,18 @@ const Scene = () => {
       case "desktop":
       default:
         return {
-          position: [4, 2, 0] as [number, number, number],
+          position: [3, 2, 0] as [number, number, number],
           fontSize: 0.45,
           rotation: [0, -Math.PI / 12, 0] as [number, number, number],
         };
     }
-  }, [viewport.width]);
+  }, [screenWidth]);
 
   const modelProps = useMemo(() => {
     const viewportSize =
-      viewport.width < VIEWPORT_BREAKPOINTS.MOBILE
+      screenWidth < BREAKPOINTS.MOBILE
         ? "mobile"
-        : viewport.width < VIEWPORT_BREAKPOINTS.TABLET
+        : screenWidth < BREAKPOINTS.TABLET
         ? "tablet"
         : "desktop";
 
@@ -75,7 +87,7 @@ const Scene = () => {
           position: [-3, -2, 0] as [number, number, number],
         };
     }
-  }, [viewport.width]);
+  }, [screenWidth]);
 
   return (
     <>

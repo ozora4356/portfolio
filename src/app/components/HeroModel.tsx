@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { Group, Mesh, SkinnedMesh, Material } from "three";
 import { GLTF } from "three-stdlib";
@@ -6,9 +6,6 @@ import { JSX } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
-const VIEWPORT_BREAKPOINTS = {
-  MOBILE: 10, // モバイルブレイクポイント
-} as const;
 
 const ROTATION_LIMITS = {
   MIN: -Math.PI / 3,
@@ -16,6 +13,10 @@ const ROTATION_LIMITS = {
 } as const;
 
 const ROTATION_SPEED = 0.1;
+
+const BREAKPOINTS = {
+  MOBILE: 768,
+} as const;
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -28,8 +29,8 @@ type GLTFResult = GLTF & {
 
 const HeroModel = (props: JSX.IntrinsicElements["group"]) => {
   const group = useRef<Group>(null);
-  const { viewport } = useThree();
-  const rotationRef = useRef(1); // useState を useRef に変更
+  const rotationRef = useRef(1);
+  const [screenWidth, setScreenWidth] = useState(0);
 
   const { nodes, materials, animations } = useGLTF(
     "/models/Hero/scene.gltf"
@@ -42,21 +43,29 @@ const HeroModel = (props: JSX.IntrinsicElements["group"]) => {
     }
   }, [actions]);
 
+  useEffect(() => {
+    // 初期値の設定
+    setScreenWidth(window.innerWidth);
+
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useFrame((state, delta) => {
-    if (group.current && viewport.width >= VIEWPORT_BREAKPOINTS.MOBILE) {
+    if (group.current && screenWidth >= BREAKPOINTS.MOBILE) {
       const currentRotation = group.current.rotation.y;
 
-      // 回転方向を判定
       if (currentRotation >= ROTATION_LIMITS.MAX) {
         rotationRef.current = -1;
       } else if (currentRotation <= ROTATION_LIMITS.MIN) {
         rotationRef.current = 1;
       }
 
-      // 回転を適用
       group.current.rotation.y += delta * ROTATION_SPEED * rotationRef.current;
-
-      // 回転角度を制限値内に強制的に収める
       group.current.rotation.y = Math.max(
         ROTATION_LIMITS.MIN,
         Math.min(ROTATION_LIMITS.MAX, group.current.rotation.y)

@@ -10,6 +10,9 @@ const FooterSection = styled.section`
   height: 80vh;
   overflow: hidden;
   cursor: pointer;
+  @media screen and (max-width: 767px) {
+    height: 60vh;
+  }
 `;
 
 const CanvasWrapper = styled.div`
@@ -44,12 +47,22 @@ const ContentWrapper = styled.div`
   justify-content: center;
   pointer-events: auto;
   cursor: pointer;
+  @media screen and (max-width: 1024px) {
+    right: 32px;
+    bottom: 32px;
+  }
   p {
     font-size: 80px;
     line-height: 1;
     font-weight: 700;
     text-transform: uppercase;
     font-family: var(--main-site-font);
+    @media screen and (max-width: 1024px) {
+      font-size: 64px;
+    }
+    @media screen and (max-width: 767px) {
+      font-size: 40px;
+    }
   }
 `;
 

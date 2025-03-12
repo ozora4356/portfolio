@@ -18,7 +18,7 @@ const Scroll = styled.div`
       transform: translateY(90%);
     }
   }
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     background-color: #fff;
     box-shadow: 0px 0px 10px #fff;
     width: 5px;
@@ -42,13 +42,8 @@ const Button = styled.button`
   box-shadow: 0px 0px 10px #fff;
   cursor: pointer;
   transition: all 0.3s ease;
-  @media (max-width: 768px) {
-    outline: 2px solid #fff;
-    box-shadow: 0px 0px 10px #fff;
-    bottom: 44px;
-    right: 40px;
-    width: 32px;
-    height: 56px;
+  @media (max-width: 767px) {
+    display: none;
   }
   &::after {
     content: "scroll";

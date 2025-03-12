@@ -8,26 +8,46 @@ const AboutSection = styled.section`
 
 const AboutSectionWrapper = styled.div`
   max-width: 1464px;
-  padding: 160px 32px;
+  padding: 120px 32px;
   margin: 0 auto;
+  @media screen and (max-width: 1024px) {
+    padding: 60px 32px 120px;
+  }
+  @media screen and (max-width: 767px) {
+    padding: 60px 32px 120px;
+  }
 `;
 
 const AboutSectionLayout = styled.div`
   display: flex;
   position: relative;
-  /* column-gap: 200px;  */
   align-items: stretch;
   justify-content: space-between;
+  column-gap: 80px;
+  @media screen and (max-width: 1200px) {
+    column-gap: 40px;
+  }
+  @media screen and (max-width: 767px) {
+    display: block;
+  }
 `;
 
 const SubContainer = styled.div``;
 
 const AboutExperienceContainer = styled.div`
-  width: 100%;
+  flex: 1;
+  /* width: 100%; */
   height: 700px;
+  @media screen and (max-width: 1200px) {
+    height: 500px;
+  }
+  @media screen and (max-width: 767px) {
+    height: 300px;
+  }
 `;
 
 const AnimatedContainer = styled.div<{ isVisible: boolean }>`
+  flex: 1;
   transform-origin: center top;
   transform: rotate3d(
     1,
@@ -35,7 +55,6 @@ const AnimatedContainer = styled.div<{ isVisible: boolean }>`
     0,
     ${(props) => (props.isVisible ? "0deg" : "-90deg")}
   );
-  width: 100%;
   transition: transform 2000ms cubic-bezier(0.19, 1, 0.22, 1);
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   transition-property: transform, opacity;
