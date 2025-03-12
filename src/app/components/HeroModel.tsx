@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
-import { Group, Mesh, SkinnedMesh, Material } from "three";
+import { Group } from "three";
 import { GLTF } from "three-stdlib";
 import { JSX } from "react";
 import { useFrame } from "@react-three/fiber";
@@ -19,10 +19,10 @@ const BREAKPOINTS = {
 
 type GLTFResult = GLTF & {
   nodes: {
-    [key: string]: Mesh | SkinnedMesh;
+    [key: string]: THREE.Mesh; // すべてのノードをMeshとして扱う
   };
   materials: {
-    [key: string]: Material;
+    [key: string]: THREE.Material;
   };
 };
 
@@ -33,7 +33,7 @@ const HeroModel = (props: JSX.IntrinsicElements["group"]) => {
 
   const { nodes, materials, animations } = useGLTF(
     "/models/Hero/scene.gltf"
-  ) as GLTFResult;
+  ) as unknown as GLTFResult;
 
   const { actions } = useAnimations(animations, group);
   useEffect(() => {
