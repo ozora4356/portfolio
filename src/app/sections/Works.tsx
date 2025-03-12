@@ -25,7 +25,7 @@ const WorksSectionLayout = styled.div`
   justify-content: space-between;
   @media screen and (max-width: 767px) {
     flex-direction: column;
-    row-gap: 80px;
+    row-gap: 64px;
   }
 `;
 
@@ -55,6 +55,10 @@ const Title = styled.h2`
   @media screen and (max-width: 1024px) {
     font-size: 60px;
   }
+  @media screen and (max-width: 767px) {
+    font-size: 40px;
+    padding: 16px;
+  }
 `;
 
 const TitleText = styled.span<{ isVisible: boolean; delay?: number }>`
@@ -83,7 +87,7 @@ const WorkList = styled.ul`
   gap: 80px;
   width: 100%;
   @media screen and (max-width: 767px) {
-    gap: 60px;
+    gap: 40px;
   }
 `;
 
