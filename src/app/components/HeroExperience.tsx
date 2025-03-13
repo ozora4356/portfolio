@@ -13,6 +13,7 @@ const BREAKPOINTS = {
 
 const Scene = () => {
   const [screenWidth, setScreenWidth] = useState(0);
+  const [modelLoaded, setModelLoaded] = useState(false);
 
   useEffect(() => {
     // 初期値の設定
@@ -110,19 +111,31 @@ const Scene = () => {
         scale={modelProps.scale}
         position={modelProps.position}
         rotation={[0.05, -1.5, 0]}
+        onLoad={() => setModelLoaded(true)}
       />
-      <ambientLight intensity={1} />
-      <directionalLight
-        position={[10, 10, 10]}
-        intensity={3}
-      />
+      {modelLoaded && (
+        <>
+          <ambientLight intensity={1} />
+          <directionalLight
+            position={[10, 10, 10]}
+            intensity={3}
+          />
+        </>
+      )}
     </>
   );
 };
 
 const HeroExperience = () => {
   return (
-    <Canvas>
+    <Canvas
+      dpr={[1, 1.5]}
+      performance={{ min: 0.5 }}
+      gl={{
+        powerPreference: "high-performance",
+
+      }}
+    >
       <Suspense fallback={<CanvasLoader />}>
         <Scene />
       </Suspense>

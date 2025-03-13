@@ -56,8 +56,8 @@ const Title = styled.h2`
     font-size: 60px;
   }
   @media screen and (max-width: 767px) {
-    font-size: 40px;
-    padding: 16px;
+    font-size: 48px;
+    padding: 8px 16px;
   }
 `;
 
