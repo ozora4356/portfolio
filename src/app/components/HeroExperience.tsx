@@ -1,7 +1,7 @@
 "use client";
 
 import { PerspectiveCamera, Text } from "@react-three/drei";
-import { Suspense, useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect } from "react";
 import HeroModel from "../components/HeroModel";
 import { Canvas } from "@react-three/fiber";
 // import CanvasLoader from "./CanvasLoader";
