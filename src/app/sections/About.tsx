@@ -106,7 +106,21 @@ const SkillItem = styled.li`
 
 export default function About() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const aboutContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // 初期チェック
+    checkMobile();
+
+    // リサイズ時のチェック
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -179,9 +193,11 @@ export default function About() {
               </SkillsList>
             </SubContainer>
           </AnimatedContainer>
-          <AboutExperienceContainer>
-            <AboutExperience />
-          </AboutExperienceContainer>
+          {!isMobile && (
+            <AboutExperienceContainer>
+              <AboutExperience />
+            </AboutExperienceContainer>
+          )}
         </AboutSectionLayout>
       </AboutSectionWrapper>
     </AboutSection>
