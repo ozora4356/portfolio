@@ -2,6 +2,10 @@ import React, { useMemo } from "react";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
+
+const MODEL_PATH = "/models/About/scene.gltf";
+useGLTF.preload(MODEL_PATH, true);
+
 // 型定義を追加
 type GLTFResult = {
   nodes: {
@@ -21,7 +25,7 @@ interface ModelProps extends React.ComponentProps<"group"> {
 
 const AboutModel = (props: ModelProps) => {
   const { nodes, materials } = useGLTF(
-    "/models/About/scene.gltf",
+    MODEL_PATH,
     true // Draco圧縮を有効化
   ) as unknown as GLTFResult;
 
@@ -178,5 +182,3 @@ const AboutModel = (props: ModelProps) => {
 
 export default React.memo(AboutModel);
 
-// プリロードの最適化
-useGLTF.preload("/models/About/scene.gltf", true);

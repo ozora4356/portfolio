@@ -6,6 +6,9 @@ import { JSX } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
+const MODEL_PATH = "/models/Hero/scene.gltf";
+useGLTF.preload(MODEL_PATH, true);
+
 const ROTATION_LIMITS = {
   MIN: -Math.PI / 3,
   MAX: 0,
@@ -31,14 +34,18 @@ const HeroModel = (props: JSX.IntrinsicElements["group"]) => {
   const rotationRef = useRef(1);
   const [screenWidth, setScreenWidth] = useState(0);
 
+  // Dracoデコーダーを使用してGLTFを読み込む
   const { nodes, materials, animations } = useGLTF(
-    "/models/Hero/scene.gltf",
-    true // Draco圧縮を有効化
+    MODEL_PATH,
+    true
   ) as unknown as GLTFResult;
 
+  // アニメーションの最適化
   const { actions } = useAnimations(animations, group);
   useEffect(() => {
     if (actions["Scene"]) {
+      // アニメーションの品質とパフォーマンスのバランスを調整
+      actions["Scene"].setEffectiveTimeScale(0.8);
       actions["Scene"].play();
     }
   }, [actions]);
@@ -1346,5 +1353,3 @@ const HeroModel = (props: JSX.IntrinsicElements["group"]) => {
 };
 
 export default React.memo(HeroModel);
-
-useGLTF.preload("/models/Hero/scene.gltf", true);
