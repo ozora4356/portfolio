@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import React, { useRef, useEffect, useState } from "react";
-// import AboutExperience from "../components/AboutExperience";
+import AboutExperience from "../components/AboutExperience";
 
 const AboutSection = styled.section`
   position: relative;
@@ -32,20 +32,20 @@ const AboutSectionLayout = styled.div`
   }
 `;
 
-// const AboutExperienceContainer = styled.div`
-//   width: calc((100% - 80px) / 2);
-//   height: 700px;
-//   @media screen and (max-width: 1200px) {
-//     width: calc((100% - 80px) / 2);
-//     height: 500px;
-//   }
-//   @media screen and (max-width: 767px) {
-//     width: 100%;
-//     height: 70vw;
-//     margin-top: 60px;
-//     display: none;
-//   }
-// `;
+const AboutExperienceContainer = styled.div`
+  width: calc((100% - 80px) / 2);
+  height: 700px;
+  @media screen and (max-width: 1200px) {
+    width: calc((100% - 80px) / 2);
+    height: 500px;
+  }
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    height: 70vw;
+    margin-top: 60px;
+    display: none;
+  }
+`;
 
 const AnimatedContainer = styled.div`
   width: calc((100% - 80px) / 2);
@@ -106,21 +106,21 @@ const SkillItem = styled.li`
 
 export default function About() {
   const [isVisible, setIsVisible] = useState(false);
-  // const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const aboutContainerRef = useRef<HTMLDivElement>(null);
 
-  // useEffect(() => {
-  //   const checkMobile = () => {
-  //     setIsMobile(window.innerWidth < 768);
-  //   };
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
 
-  //   // 初期チェック
-  //   checkMobile();
+    // 初期チェック
+    checkMobile();
 
-  //   // リサイズ時のチェック
-  //   window.addEventListener("resize", checkMobile);
-  //   return () => window.removeEventListener("resize", checkMobile);
-  // }, []);
+    // リサイズ時のチェック
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -193,11 +193,11 @@ export default function About() {
               </SkillsList>
             </SubContainer>
           </AnimatedContainer>
-          {/* {!isMobile && (
+          {!isMobile && (
             <AboutExperienceContainer>
               <AboutExperience />
             </AboutExperienceContainer>
-          )} */}
+          )}
         </AboutSectionLayout>
       </AboutSectionWrapper>
     </AboutSection>
