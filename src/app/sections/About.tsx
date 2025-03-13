@@ -193,11 +193,11 @@ export default function About() {
               </SkillsList>
             </SubContainer>
           </AnimatedContainer>
-          {!isMobile && (
+          {/* {!isMobile && (
             <AboutExperienceContainer>
               <AboutExperience />
             </AboutExperienceContainer>
-          )}
+          )} */}
         </AboutSectionLayout>
       </AboutSectionWrapper>
     </AboutSection>
