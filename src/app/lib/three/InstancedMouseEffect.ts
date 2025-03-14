@@ -8,7 +8,7 @@ interface InstancedMouseEffectOptions {
   frequency?: number;
   mouseSize?: number;
   rotationSpeed?: number;
-  rotationAmmount?: number;
+  rotationAmount?: number;
   mouseScaling?: number;
   mouseIndent?: number;
   color?: string;
@@ -28,7 +28,7 @@ export class InstancedMouseEffect {
     if (opts.frequency == null) opts.frequency = 1;
     if (opts.mouseSize == null) opts.mouseSize = 1;
     if (opts.rotationSpeed == null) opts.rotationSpeed = 1;
-    if (opts.rotationAmmount == null) opts.rotationAmmount = 0;
+    if (opts.rotationAmount == null) opts.rotationAmount = 0;
     if (opts.mouseScaling == null) opts.mouseScaling = 0;
     if (opts.mouseIndent == null) opts.mouseIndent = 1;
     if (opts.color == null) opts.color = "#1084ff";
@@ -60,7 +60,7 @@ export class InstancedMouseEffect {
     };
     const uConfig2 = {
       value: new THREE.Vector4(
-        opts.rotationAmmount,
+        opts.rotationAmount,
         opts.mouseScaling,
         opts.mouseIndent
       ),

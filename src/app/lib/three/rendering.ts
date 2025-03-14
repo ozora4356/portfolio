@@ -52,9 +52,9 @@ export class Rendering {
     this.clock = new THREE.Clock();
 
     this.camera = new THREE.PerspectiveCamera(
-      6,
+      7,
       window.innerWidth / window.innerHeight,
-      0.1,
+      1,
       1000
     );
     this.camera.position.set(40, 40, 40);
