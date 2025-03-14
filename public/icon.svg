@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- シンプルな格子状の球体 -->
+  <g stroke="rgb(128, 0, 255)" stroke-width="1.2" fill="none">
+    <!-- 主要な水平円 -->
+    <circle cx="16" cy="16" r="12" />
+    <circle cx="16" cy="16" r="8" />
+    
+    <!-- 主要な縦の楕円 -->
+    <ellipse cx="16" cy="16" rx="12" ry="4" />
+    <ellipse cx="16" cy="16" rx="12" ry="4" transform="rotate(90, 16, 16)" />
+    
+    <!-- 対角線の楕円 -->
+    <ellipse cx="16" cy="16" rx="12" ry="4" transform="rotate(45, 16, 16)" />
+    <ellipse cx="16" cy="16" rx="12" ry="4" transform="rotate(-45, 16, 16)" />
+  </g>
+</svg>

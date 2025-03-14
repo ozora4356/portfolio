@@ -5,6 +5,9 @@ import RootStyleRegistry from "./emotion";
 export const metadata: Metadata = {
   title: "Fujisaki Ozora Portfolio",
   description: "Fujisaki Ozora Portfolio",
+  icons: {
+    icon: '/icon.svg', 
+  },
   openGraph: {
     title: 'Fujisaki Ozora Portfolio',
     description: '2025 Fujisaki Ozora Portfolio',
