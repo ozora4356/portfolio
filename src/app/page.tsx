@@ -10,7 +10,8 @@ import Footer from "./sections/Footer";
 import FixedExperience from "./components/FixedExperience";
 
 const Main = styled.main`
-  background-color: #000;
+  /* background-color: #000; */
+  background-color: rgb(8, 13, 31);
 `;
 
 const FixedExperienceWrapper = styled.div`

@@ -88,7 +88,8 @@ const Footer = () => {
       rotationAmount: 0,
       mouseScaling: 0.5,
       mouseIndent: window.innerWidth < 768 ? 0 : 1,
-      color: "#111",
+      // color: "#111",
+      color:"rgb(31, 34, 51)",
       shape: "square",
     });
 
