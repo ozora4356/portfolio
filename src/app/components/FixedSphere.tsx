@@ -320,16 +320,21 @@ const FixedSphere = () => {
           ? 0.75
           : 1;
 
-      gsap.to(meshRef.current.scale, {
-        x: targetScale,
-        y: targetScale,
-        z: targetScale,
-        duration: 1.2, // アニメーション時間
-        ease: "elastic.out(1, 0.5)", // 弾力のあるアニメーション
-        onComplete: () => {
-          setInitialAnimationComplete(true);
-        },
-      });
+      // 少し遅延させてアニメーションを開始（初期レンダリングの問題を回避）
+      setTimeout(() => {
+        if (meshRef.current) {
+          gsap.to(meshRef.current.scale, {
+            x: targetScale,
+            y: targetScale,
+            z: targetScale,
+            duration: 1.2, // アニメーション時間
+            ease: "elastic.out(1, 0.5)", // 弾力のあるアニメーション
+            onComplete: () => {
+              setInitialAnimationComplete(true);
+            },
+          });
+        }
+      }, 100);
     }
 
     // イベントリスナーの追加
@@ -354,11 +359,17 @@ const FixedSphere = () => {
   });
 
   return (
-    <mesh ref={meshRef}>
-      <icosahedronGeometry args={[1, subdivisionLevel]} />
-      {/* @ts-expect-error - cubeMaterial is defined in cubeMaterial.ts */}
-      <cubeMaterial ref={materialRef} />
-    </mesh>
+    <>
+      {/* 初期スケールを0に設定して、アニメーション前のチラつきを防止 */}
+      <mesh
+        ref={meshRef}
+        scale={[0, 0, 0]}
+      >
+        <icosahedronGeometry args={[1, subdivisionLevel]} />
+        {/* @ts-expect-error - cubeMaterial is defined in cubeMaterial.ts */}
+        <cubeMaterial ref={materialRef} />
+      </mesh>
+    </>
   );
 };
 
