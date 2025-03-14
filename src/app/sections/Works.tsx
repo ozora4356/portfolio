@@ -50,14 +50,16 @@ const Title = styled.h2`
   line-height: 0.9;
   font-size: 80px;
   font-weight: 700;
-  border-left: 4px solid var(--main-site-color);
+  /* border-left: 4px solid var(--main-site-color); */
   padding: 16px 32px;
+  padding: 16px 32px 16px 0;
+  opacity: 0.9;
   @media screen and (max-width: 1024px) {
     font-size: 60px;
   }
   @media screen and (max-width: 767px) {
     font-size: 48px;
-    padding: 8px 16px;
+    padding: 8px 16px 8px 0;
   }
 `;
 
@@ -65,19 +67,11 @@ const TitleText = styled.span<{ isVisible: boolean; delay?: number }>`
   display: inline-block;
   position: relative;
   overflow: hidden;
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #111;
-    transform: translateY(${(props) => (props.isVisible ? "100%" : "0")});
-    transition: transform 1000ms cubic-bezier(0.19, 1, 0.22, 1)
-      ${(props) => props.delay || 0}ms;
-  }
+  clip-path: ${(props) =>
+    props.isVisible
+      ? "polygon(0 0, 200% 0, 0 200%);"
+      : "polygon(0 0, 0 0, 0 0);"};
+  transition: clip-path 1800ms cubic-bezier(0.19, 1, 0.22, 1);
 `;
 
 const WorkList = styled.ul`
@@ -130,7 +124,7 @@ const Description = styled.div`
     font-weight: 500;
   }
   p {
-    color: #9a9d97;
+    color: #bdbdbd;
     font-size: 16px;
     font-weight: 400;
     @media screen and (max-width: 767px) {
@@ -149,12 +143,12 @@ export default function Works() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true);
-            observer.disconnect(); 
+            observer.disconnect();
           }
         });
       },
       {
-        threshold: 0.3, 
+        threshold: 0.3,
       }
     );
 
@@ -173,26 +167,11 @@ export default function Works() {
         <WorksSectionLayout>
           <WorksSectionSticky>
             <Title ref={titleRef}>
-              <TitleText
-                isVisible={isVisible}
-                delay={0}
-              >
-                WORKS
-              </TitleText>
+              <TitleText isVisible={isVisible}>Works</TitleText>
               <br />
-              <TitleText
-                isVisible={isVisible}
-                delay={200}
-              >
-                CREATED
-              </TitleText>
+              <TitleText isVisible={isVisible}>Created</TitleText>
               <br />
-              <TitleText
-                isVisible={isVisible}
-                delay={400}
-              >
-                REACT
-              </TitleText>
+              <TitleText isVisible={isVisible}>React</TitleText>
             </Title>
           </WorksSectionSticky>
           <WorkList>

@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import React, { useRef, useEffect, useState } from "react";
-import AboutExperience from "../components/AboutExperience";
 
 const AboutSection = styled.section`
   position: relative;
@@ -8,22 +7,23 @@ const AboutSection = styled.section`
 
 const AboutSectionWrapper = styled.div`
   max-width: 1464px;
-  padding: 120px 32px;
+  padding: 120px 32px 240px;
   margin: 0 auto;
   @media screen and (max-width: 1024px) {
-    padding: 60px 32px 120px;
+    padding: 60px 32px 140px;
   }
   @media screen and (max-width: 767px) {
-    padding: 60px 32px 120px;
+    padding: 60px 32px 140px;
   }
 `;
 
 const AboutSectionLayout = styled.div`
-  display: flex;
+  /* display: flex; */
   position: relative;
   align-items: stretch;
   justify-content: space-between;
   column-gap: 80px;
+  z-index: 1;
   @media screen and (max-width: 1200px) {
     column-gap: 40px;
   }
@@ -32,60 +32,46 @@ const AboutSectionLayout = styled.div`
   }
 `;
 
-const AboutExperienceContainer = styled.div`
-  width: calc((100% - 80px) / 2);
-  height: 700px;
-  @media screen and (max-width: 1200px) {
-    width: calc((100% - 80px) / 2);
-    height: 500px;
-  }
+const DescriptionContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px 80px;
+  /* width: 50%; */
+  z-index: 1;
   @media screen and (max-width: 767px) {
     width: 100%;
-    height: 70vw;
-    margin-top: 60px;
-    display: none;
-  }
-`;
-
-const AnimatedContainer = styled.div`
-  width: calc((100% - 80px) / 2);
-  @media screen and (max-width: 1200px) {
-    width: calc((100% - 40px) / 2);
-  }
-  @media screen and (max-width: 767px) {
-    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 60px;
   }
 `;
 
 const SubContainer = styled.div<{ isVisible: boolean }>`
-  transform-origin: center top;
-  transform: rotate3d(
-    1,
-    0,
-    0,
-    ${(props) => (props.isVisible ? "0deg" : "-90deg")}
-  );
-  transition: transform 2000ms cubic-bezier(0.19, 1, 0.22, 1);
-  opacity: ${(props) => (props.isVisible ? 1 : 0)};
-  transition-property: transform, opacity;
+  clip-path: ${(props) =>
+    props.isVisible
+      ? "polygon(0 0, 200% 0, 0 200%);"
+      : "polygon(0 0, 0 0, 0 0);"};
+  transition: clip-path 1800ms cubic-bezier(0.19, 1, 0.22, 1);
 `;
 
 const Description = styled.div`
   color: white;
   font-size: 16px;
   line-height: 1.8;
-  margin-bottom: 40px;
-
   > p {
-    margin-bottom: 1em;
+    &:nth-child(n + 2) {
+      margin-top: 1em;
+    }
   }
 `;
 
 const SubTitle = styled.h3`
   color: white;
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 700;
   margin-bottom: 24px;
+  @media screen and (max-width: 767px) {
+    font-size: 24px;
+  }
 `;
 
 const SkillsList = styled.ul`
@@ -106,21 +92,7 @@ const SkillItem = styled.li`
 
 export default function About() {
   const [isVisible, setIsVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const aboutContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    // 初期チェック
-    checkMobile();
-
-    // リサイズ時のチェック
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const animationRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -137,8 +109,8 @@ export default function About() {
       }
     );
 
-    if (aboutContainerRef.current) {
-      observer.observe(aboutContainerRef.current);
+    if (animationRef.current) {
+      observer.observe(animationRef.current);
     }
 
     return () => {
@@ -150,30 +122,32 @@ export default function About() {
     <AboutSection id="about">
       <AboutSectionWrapper>
         <AboutSectionLayout>
-          <AnimatedContainer>
+          <DescriptionContainer>
             <SubContainer
-              ref={aboutContainerRef}
+              ref={animationRef}
               isVisible={isVisible}
             >
               <SubTitle>About</SubTitle>
               <Description>
                 <p>
-                  様々な企業のプロモーションやブランディングに伴うWebサイト制作・リニューアル、アプリケーション開発、LP制作・改修から運用・保守まで幅広く対応してきました。
+                  様々な企業のプロモーションやブランディングに伴うWebサイトの制作・リニューアル・改修・運用・保守、アプリケーション開発、LP制作まで幅広く対応してきました。
                 </p>
                 <p>
                   WordPressテーマ開発を中心とした3年半の実務経験の中で、フロントエンド技術の変遷に合わせて自身のスキルセットを継続的に拡大。
                 </p>
                 <p>
-                  初期はjQueryやgulp.jsを活用したサイト構築から始まり、その後VueやTailwindCSS、Viteなどのモダンフレームワークやビルドツールを実務に取り入れてきました。
+                  初期はjQueryやgulp.jsを活用したサイト構築から始まり、その後Vue.jsやTailwindCSS、Viteなどのモダンフレームワークやビルドツールを実務に取り入れてきました。
                 </p>
                 <p>
-                  プロセス全体をスムーズに進行できるように、担当範囲の業務に縛られることなく、ディレクターやデザイナーと密に連携し、各工程の背景情報を取りに行くことを心がけています。
+                  技術面では、技術的負債を残さない技術選定と既存システムへの深い理解に基づいたメンテナンス・改修を重視しています。
+                </p>
+                <p>
+                  コミュニケーション面では、担当範囲に限定されず、ディレクターやデザイナーと密に連携し、各工程やクライアントの背景情報を積極的に把握することを重視しています。
                 </p>
               </Description>
             </SubContainer>
-
             <SubContainer
-              ref={aboutContainerRef}
+              ref={animationRef}
               isVisible={isVisible}
             >
               <SubTitle>Skills</SubTitle>
@@ -192,12 +166,19 @@ export default function About() {
                 <SkillItem>XD</SkillItem>
               </SkillsList>
             </SubContainer>
-          </AnimatedContainer>
-          {!isMobile && (
-            <AboutExperienceContainer>
-              <AboutExperience />
-            </AboutExperienceContainer>
-          )}
+            <SubContainer
+              ref={animationRef}
+              isVisible={isVisible}
+            >
+              <SubTitle>HISTORY</SubTitle>
+              <Description>
+                <dl>
+                  <dt>2021.07 - 2025.02</dt>
+                  <dd>株式会社フライング・ハイ・ワークス</dd>
+                </dl>
+              </Description>
+            </SubContainer>
+          </DescriptionContainer>
         </AboutSectionLayout>
       </AboutSectionWrapper>
     </AboutSection>

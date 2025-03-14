@@ -6,11 +6,15 @@ import Works from "./sections/Works";
 import { useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
 import About from "./sections/About";
-import MouseTracker from "./components/MouseTracker";
 import Footer from "./sections/Footer";
+import FixedExperience from "./components/FixedExperience";
 
 const Main = styled.main`
-  background-color: #111111;
+  background-color: #000;
+`;
+
+const FixedExperienceWrapper = styled.div`
+  position: relative;
 `;
 
 export default function Home() {
@@ -34,10 +38,12 @@ export default function Home() {
 
   return (
     <Main>
-      <MouseTracker />
-      <Hero />
-      <Works />
-      <About />
+      <FixedExperienceWrapper>
+        <FixedExperience />
+        <Hero />
+        <Works />
+        <About />
+      </FixedExperienceWrapper>
       <Footer />
     </Main>
   );

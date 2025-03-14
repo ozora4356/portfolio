@@ -38,9 +38,9 @@ const CanvasWrapper = styled.div`
 const ContentWrapper = styled.div`
   position: absolute;
   right: 80px;
-  bottom: 80px;
+  bottom: 40px;
   z-index: 1;
-  color: #d8d8d8;
+  color: #fff;
   text-align: center;
   display: flex;
   align-items: center;
@@ -52,6 +52,7 @@ const ContentWrapper = styled.div`
     bottom: 32px;
   }
   p {
+    opacity: 0.6;
     font-size: 80px;
     line-height: 1;
     font-weight: 700;
@@ -84,10 +85,10 @@ const Footer = () => {
       frequency: 1,
       mouseSize: 0.75,
       rotationSpeed: 1,
-      rotationAmmount: 0,
+      rotationAmount: 0,
       mouseScaling: 0.5,
       mouseIndent: window.innerWidth < 768 ? 0 : 1,
-      color: "#249124",
+      color: "#111",
       shape: "square",
     });
 
@@ -105,7 +106,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <FooterSection onClick={handleScrollToTop}>
+    <FooterSection onClick={handleScrollToTop} id="footer">
       <CanvasWrapper>
         <div id="canvas-wrapper">
           <canvas id="canvas" />
