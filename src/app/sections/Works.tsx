@@ -114,7 +114,7 @@ const Thumbnail = styled.div`
 const Description = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
   margin-top: 24px;
   @media screen and (max-width: 767px) {
     margin-top: 16px;
@@ -132,6 +132,74 @@ const Description = styled.div`
     }
   }
 `;
+
+const LogoList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  list-style: none;
+`;
+
+const LogoItem = styled.li`
+  display: grid;
+  place-items: center;
+  padding: 8px;
+  background-color: #222;
+  border-radius: 8px;
+  img {
+    width: 30px;
+    height: 30px;
+    @media screen and (max-width: 767px) {
+      width: 24px;
+      height: 24px;
+    }
+  }
+`;
+
+interface TechStackProps {
+  techs: Array<{
+    name: string;
+    icon: string;
+  }>;
+}
+
+const TechStack = ({ techs }: TechStackProps) => {
+  return (
+    <LogoList>
+      {techs.map((tech) => (
+        <LogoItem key={tech.name}>
+          <Image
+            src={tech.icon}
+            alt={tech.name}
+            width={32}
+            height={32}
+          />
+        </LogoItem>
+      ))}
+    </LogoList>
+  );
+};
+
+const techStacks = {
+  vtuber: [
+    { name: "React", icon: "/icons/react.svg" },
+    { name: "TypeScript", icon: "/icons/typescript.svg" },
+    { name: "TailwindCSS", icon: "/icons/tailwindcss.svg" },
+    { name: "Next.js", icon: "/icons/next.svg" },
+  ],
+  mbti: [
+    { name: "React", icon: "/icons/react.svg" },
+    { name: "TypeScript", icon: "/icons/typescript.svg" },
+    { name: "TailwindCSS", icon: "/icons/tailwindcss.svg" },
+    { name: "Next.js", icon: "/icons/next.svg" },
+  ],
+  xCommand: [
+    { name: "React", icon: "/icons/react.svg" },
+    { name: "TypeScript", icon: "/icons/typescript.svg" },
+    { name: "TailwindCSS", icon: "/icons/tailwindcss.svg" },
+    { name: "Next.js", icon: "/icons/next.svg" },
+  ],
+};
 
 export default function Works() {
   const [isVisible, setIsVisible] = useState(false);
@@ -190,7 +258,11 @@ export default function Works() {
                 </Thumbnail>
                 <Description>
                   <h3>Vtuber Lives App</h3>
-                  <p>React.js / Next.js / TypeScript / TailwindCSS / Vercel</p>
+                  <p>
+                    VTuberのリアルタイムで行われている配信やスケジュールを一覧で確認できるアプリケーションです。
+                    視聴者数やお気に入り登録したチャンネルが配信中かどうかを簡単に確認できます。
+                  </p>
+                  <TechStack techs={techStacks.vtuber} />
                 </Description>
               </Link>
             </WorkItem>
@@ -209,7 +281,10 @@ export default function Works() {
                 </Thumbnail>
                 <Description>
                   <h3>Mbti Compatibility App</h3>
-                  <p>React.js / Next.js / TypeScript / TailwindCSS / Vercel</p>
+                  <p>
+                    MBTIタイプの相性を確認できるアプリケーション。自分のタイプと相手のタイプを選択すると、相性の特徴やアドバイスを表示します。
+                  </p>
+                  <TechStack techs={techStacks.mbti} />
                 </Description>
               </Link>
             </WorkItem>
@@ -228,7 +303,10 @@ export default function Works() {
                 </Thumbnail>
                 <Description>
                   <h3>X Command App</h3>
-                  <p>React.js / Next.js / TypeScript / TailwindCSS / Vercel</p>
+                  <p>
+                    X（旧Twitter）の投稿を効率的に管理するためのコマンドラインツール。作成したコマンドでポストを検索できます。
+                  </p>
+                  <TechStack techs={techStacks.xCommand} />
                 </Description>
               </Link>
             </WorkItem>
