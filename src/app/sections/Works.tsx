@@ -187,12 +187,6 @@ const techStacks = {
     { name: "TailwindCSS", icon: "/icons/tailwindcss.svg" },
     { name: "Next.js", icon: "/icons/next.svg" },
   ],
-  mbti: [
-    { name: "React", icon: "/icons/react.svg" },
-    { name: "TypeScript", icon: "/icons/typescript.svg" },
-    { name: "TailwindCSS", icon: "/icons/tailwindcss.svg" },
-    { name: "Next.js", icon: "/icons/next.svg" },
-  ],
   xCommand: [
     { name: "React", icon: "/icons/react.svg" },
     { name: "TypeScript", icon: "/icons/typescript.svg" },
@@ -200,6 +194,27 @@ const techStacks = {
     { name: "Next.js", icon: "/icons/next.svg" },
   ],
 };
+
+// プロジェクトデータを配列として定義
+const projects = [
+  {
+    name: "Vtuber Lives App",
+    description:
+      "VTuberのリアルタイムで行われている配信やスケジュールを一覧で確認できるアプリケーションです。視聴者数やお気に入り登録したチャンネルが配信中かどうかを簡単に確認できます。",
+    link: "https://v-live-pi.vercel.app/",
+    image: "https://v-live-pi.vercel.app/og-image.png",
+    techStack: techStacks.vtuber,
+  },
+  {
+    name: "X Command App",
+    description:
+      "X（旧Twitter）の投稿を効率的に管理するためのコマンドラインツール。作成したコマンドでポストを検索できます。",
+    link: "https://command-app.vercel.app/",
+    image: "https://command-app.vercel.app/logo-white.png",
+    techStack: techStacks.xCommand,
+  },
+  // 他のプロジェクトを追加可能
+];
 
 export default function Works() {
   const [isVisible, setIsVisible] = useState(false);
@@ -243,73 +258,28 @@ export default function Works() {
             </Title>
           </WorksSectionSticky>
           <WorkList>
-            <WorkItem>
-              <Link
-                href="https://v-live-pi.vercel.app/"
-                target="_blank"
-              >
-                <Thumbnail>
-                  <Image
-                    src="https://v-live-pi.vercel.app/og-image.png"
-                    alt="Vtuber Lives App"
-                    fill
-                    style={{ objectFit: "cover" }}
-                  />
-                </Thumbnail>
-                <Description>
-                  <h3>Vtuber Lives App</h3>
-                  <p>
-                    VTuberのリアルタイムで行われている配信やスケジュールを一覧で確認できるアプリケーションです。
-                    視聴者数やお気に入り登録したチャンネルが配信中かどうかを簡単に確認できます。
-                  </p>
-                  <TechStack techs={techStacks.vtuber} />
-                </Description>
-              </Link>
-            </WorkItem>
-            <WorkItem>
-              <Link
-                href="https://mbti-sage-eight.vercel.app/"
-                target="_blank"
-              >
-                <Thumbnail>
-                  <Image
-                    src="https://mbti-sage-eight.vercel.app/ogp.png"
-                    alt="Mbti Compatibility App"
-                    fill
-                    style={{ objectFit: "cover" }}
-                  />
-                </Thumbnail>
-                <Description>
-                  <h3>Mbti Compatibility App</h3>
-                  <p>
-                    MBTIタイプの相性を確認できるアプリケーション。自分のタイプと相手のタイプを選択すると、相性の特徴やアドバイスを表示します。
-                  </p>
-                  <TechStack techs={techStacks.mbti} />
-                </Description>
-              </Link>
-            </WorkItem>
-            <WorkItem>
-              <Link
-                href="https://command-app.vercel.app/"
-                target="_blank"
-              >
-                <Thumbnail>
-                  <Image
-                    src="https://command-app.vercel.app/logo-white.png"
-                    alt="X Command App"
-                    fill
-                    style={{ objectFit: "cover" }}
-                  />
-                </Thumbnail>
-                <Description>
-                  <h3>X Command App</h3>
-                  <p>
-                    X（旧Twitter）の投稿を効率的に管理するためのコマンドラインツール。作成したコマンドでポストを検索できます。
-                  </p>
-                  <TechStack techs={techStacks.xCommand} />
-                </Description>
-              </Link>
-            </WorkItem>
+            {projects.map((project) => (
+              <WorkItem key={project.name}>
+                <Link
+                  href={project.link}
+                  target="_blank"
+                >
+                  <Thumbnail>
+                    <Image
+                      src={project.image}
+                      alt={project.name}
+                      fill
+                      style={{ objectFit: "cover" }}
+                    />
+                  </Thumbnail>
+                  <Description>
+                    <h3>{project.name}</h3>
+                    <p>{project.description}</p>
+                    <TechStack techs={project.techStack} />
+                  </Description>
+                </Link>
+              </WorkItem>
+            ))}
           </WorkList>
         </WorksSectionLayout>
       </WorksSectionWrapper>

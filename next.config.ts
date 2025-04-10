@@ -10,10 +10,6 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'mbti-sage-eight.vercel.app',
-      },
-      {
-        protocol: 'https',
         hostname: 'command-app.vercel.app',
       },
     ],
