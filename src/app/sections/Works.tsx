@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
-import Link from "next/link";
-import { useRef, useEffect, useState } from "react";
-import Image from "next/image";
+import styled from '@emotion/styled';
+import Link from 'next/link';
+import { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 const WorksSection = styled.section`
   position: relative;
 `;
@@ -69,8 +69,8 @@ const TitleText = styled.span<{ isVisible: boolean; delay?: number }>`
   overflow: hidden;
   clip-path: ${(props) =>
     props.isVisible
-      ? "polygon(0 0, 200% 0, 0 200%);"
-      : "polygon(0 0, 0 0, 0 0);"};
+      ? 'polygon(0 0, 200% 0, 0 200%);'
+      : 'polygon(0 0, 0 0, 0 0);'};
   transition: clip-path 1800ms cubic-bezier(0.19, 1, 0.22, 1);
 `;
 
@@ -168,12 +168,7 @@ const TechStack = ({ techs }: TechStackProps) => {
     <LogoList>
       {techs.map((tech) => (
         <LogoItem key={tech.name}>
-          <Image
-            src={tech.icon}
-            alt={tech.name}
-            width={32}
-            height={32}
-          />
+          <Image src={tech.icon} alt={tech.name} width={32} height={32} />
         </LogoItem>
       ))}
     </LogoList>
@@ -182,37 +177,37 @@ const TechStack = ({ techs }: TechStackProps) => {
 
 const techStacks = {
   vtuber: [
-    { name: "React", icon: "/icons/react.svg" },
-    { name: "TypeScript", icon: "/icons/typescript.svg" },
-    { name: "TailwindCSS", icon: "/icons/tailwindcss.svg" },
-    { name: "Next.js", icon: "/icons/next.svg" },
+    { name: 'React', icon: '/icons/react.svg' },
+    { name: 'TypeScript', icon: '/icons/typescript.svg' },
+    { name: 'TailwindCSS', icon: '/icons/tailwindcss.svg' },
+    { name: 'Next.js', icon: '/icons/next.svg' },
   ],
-  xCommand: [
-    { name: "React", icon: "/icons/react.svg" },
-    { name: "TypeScript", icon: "/icons/typescript.svg" },
-    { name: "TailwindCSS", icon: "/icons/tailwindcss.svg" },
-    { name: "Next.js", icon: "/icons/next.svg" },
-  ],
+  // xCommand: [
+  //   { name: "React", icon: "/icons/react.svg" },
+  //   { name: "TypeScript", icon: "/icons/typescript.svg" },
+  //   { name: "TailwindCSS", icon: "/icons/tailwindcss.svg" },
+  //   { name: "Next.js", icon: "/icons/next.svg" },
+  // ],
 };
 
 // プロジェクトデータを配列として定義
 const projects = [
   {
-    name: "Vtuber Lives App",
+    name: 'Vtuber Lives App',
     description:
-      "VTuberのリアルタイムで行われている配信やスケジュールを一覧で確認できるアプリケーションです。視聴者数やお気に入り登録したチャンネルが配信中かどうかを簡単に確認できます。",
-    link: "https://v-live-pi.vercel.app/",
-    image: "https://v-live-pi.vercel.app/og-image.png",
+      'VTuberのリアルタイムで行われている配信やスケジュールを一覧で確認できるアプリケーションです。視聴者数やお気に入り登録したチャンネルが配信中かどうかを簡単に確認できます。',
+    link: 'https://v-live-pi.vercel.app/',
+    image: 'https://v-live-pi.vercel.app/og-image.png',
     techStack: techStacks.vtuber,
   },
-  {
-    name: "X Command App",
-    description:
-      "X（旧Twitter）の投稿を効率的に管理するためのコマンドラインツール。作成したコマンドでポストを検索できます。",
-    link: "https://command-app.vercel.app/",
-    image: "https://command-app.vercel.app/logo-white.png",
-    techStack: techStacks.xCommand,
-  },
+  // {
+  //   name: "X Command App",
+  //   description:
+  //     "X（旧Twitter）の投稿を効率的に管理するためのコマンドラインツール。作成したコマンドでポストを検索できます。",
+  //   link: "https://command-app.vercel.app/",
+  //   image: "https://command-app.vercel.app/logo-white.png",
+  //   techStack: techStacks.xCommand,
+  // },
   // 他のプロジェクトを追加可能
 ];
 
@@ -260,16 +255,13 @@ export default function Works() {
           <WorkList>
             {projects.map((project) => (
               <WorkItem key={project.name}>
-                <Link
-                  href={project.link}
-                  target="_blank"
-                >
+                <Link href={project.link} target="_blank">
                   <Thumbnail>
                     <Image
                       src={project.image}
                       alt={project.name}
                       fill
-                      style={{ objectFit: "cover" }}
+                      style={{ objectFit: 'cover' }}
                     />
                   </Thumbnail>
                   <Description>
