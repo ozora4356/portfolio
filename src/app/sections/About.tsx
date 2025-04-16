@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import React, { useRef, useEffect, useState } from "react";
+import styled from '@emotion/styled';
+import React, { useRef, useEffect, useState } from 'react';
 
 const AboutSection = styled.section`
   position: relative;
@@ -48,8 +48,8 @@ const DescriptionContainer = styled.div`
 const SubContainer = styled.div<{ isVisible: boolean }>`
   clip-path: ${(props) =>
     props.isVisible
-      ? "polygon(0 0, 200% 0, 0 200%);"
-      : "polygon(0 0, 0 0, 0 0);"};
+      ? 'polygon(0 0, 200% 0, 0 200%);'
+      : 'polygon(0 0, 0 0, 0 0);'};
   transition: clip-path 1800ms cubic-bezier(0.19, 1, 0.22, 1);
 `;
 
@@ -123,10 +123,7 @@ export default function About() {
       <AboutSectionWrapper>
         <AboutSectionLayout>
           <DescriptionContainer>
-            <SubContainer
-              ref={animationRef}
-              isVisible={isVisible}
-            >
+            <SubContainer ref={animationRef} isVisible={isVisible}>
               <SubTitle>About</SubTitle>
               <Description>
                 <p>
@@ -146,15 +143,12 @@ export default function About() {
                 </p>
               </Description>
             </SubContainer>
-            <SubContainer
-              ref={animationRef}
-              isVisible={isVisible}
-            >
+            <SubContainer ref={animationRef} isVisible={isVisible}>
               <SubTitle>Skills</SubTitle>
               <SkillsList>
                 <SkillItem>HTML</SkillItem>
                 <SkillItem>CSS</SkillItem>
-                <SkillItem>SCSS</SkillItem>
+                <SkillItem>SASS</SkillItem>
                 <SkillItem>TailwindCSS</SkillItem>
                 <SkillItem>JavaScript</SkillItem>
                 <SkillItem>Vue.js</SkillItem>
@@ -166,10 +160,7 @@ export default function About() {
                 <SkillItem>XD</SkillItem>
               </SkillsList>
             </SubContainer>
-            <SubContainer
-              ref={animationRef}
-              isVisible={isVisible}
-            >
+            <SubContainer ref={animationRef} isVisible={isVisible}>
               <SubTitle>HISTORY</SubTitle>
               <Description>
                 <dl>
