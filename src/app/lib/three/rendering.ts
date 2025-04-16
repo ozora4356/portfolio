@@ -1,6 +1,7 @@
-import { EffectComposer, RenderPass, Pass } from "postprocessing";
-import * as THREE from "three";
-import { N8AOPostPass } from "n8ao";
+import { EffectComposer, RenderPass } from 'postprocessing';
+import type { Pass } from 'postprocessing';
+import * as THREE from 'three';
+import { N8AOPostPass } from 'n8ao';
 
 export class Rendering {
   canvas: HTMLCanvasElement;
@@ -88,7 +89,7 @@ export class Rendering {
       n8aopass.configuration.denoiseSamples = 4;
       n8aopass.configuration.denoiseRadius = 12;
       n8aopass.configuration.halfRes = true;
-      n8aopass.setQualityMode("Medium");
+      n8aopass.setQualityMode('Medium');
       n8aopass.screenSpaceRadius = true;
 
       composer.addPass(n8aopass as unknown as Pass);
@@ -100,14 +101,14 @@ export class Rendering {
   }
 
   addEvents() {
-    window.addEventListener("resize", this.onResize.bind(this));
+    window.addEventListener('resize', this.onResize.bind(this));
   }
 
   dispose() {
     this.disposed = true;
     this.renderer.dispose();
     this.scene.clear();
-    window.removeEventListener("resize", this.onResize.bind(this));
+    window.removeEventListener('resize', this.onResize.bind(this));
   }
 
   getViewSizeAtDepth(depth = 0) {

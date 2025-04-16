@@ -1,6 +1,6 @@
 import { gsap } from "gsap";
 import * as THREE from "three";
-import { Rendering } from "../../../app/lib/three/rendering";
+import { Rendering } from "./rendering";
 import RoundedBox from "./RoundedBox";
 
 interface InstancedMouseEffectOptions {

@@ -1,5 +1,5 @@
-declare module "n8ao" {
-  import * as THREE from "three";
+declare module 'n8ao' {
+  import type * as THREE from 'three';
 
   export class N8AOPostPass {
     constructor(

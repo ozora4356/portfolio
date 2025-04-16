@@ -1,8 +1,9 @@
-import React, { useRef, useEffect, useState } from "react";
-import { useFrame, extend } from "@react-three/fiber";
-import { CubeMaterial, CubeMaterialType } from "../shaders/cubeMaterial";
-import { gsap } from "gsap";
-import * as THREE from "three";
+import React, { useRef, useEffect, useState } from 'react';
+import { useFrame, extend } from '@react-three/fiber';
+import { CubeMaterial } from '../shaders/cubeMaterial';
+import type { CubeMaterialType } from '../shaders/cubeMaterial';
+import { gsap } from 'gsap';
+import * as THREE from 'three';
 
 // マテリアルをコンポーネントとして登録
 extend({ CubeMaterial });
@@ -31,7 +32,7 @@ const FixedSphere = () => {
   //64
   const subdivisionLevel = 32;
   // 現在のセクションID
-  const [currentSection, setCurrentSection] = useState<string>("");
+  const [currentSection, setCurrentSection] = useState<string>('');
   // 初期アニメーションが完了したかどうかのフラグ
   const [initialAnimationComplete, setInitialAnimationComplete] =
     useState<boolean>(false);
@@ -49,25 +50,25 @@ const FixedSphere = () => {
   // セクション定義
   const sections: Section[] = [
     {
-      id: "hero",
+      id: 'hero',
       position: [0, 0, 0],
       scale: 1,
       opacity: 1,
     },
     {
-      id: "works",
+      id: 'works',
       position: [-2.2, -0.8, 0],
       scale: 1.5,
       opacity: 0.4,
     },
     {
-      id: "about",
+      id: 'about',
       position: [1.6, -1, 0],
       scale: 1.5,
       opacity: 0.3,
     },
     {
-      id: "footer",
+      id: 'footer',
       position: [1.6, -1, 0],
       scale: 1.5,
       opacity: 0.3,
@@ -113,7 +114,7 @@ const FixedSphere = () => {
   const detectSection = () => {
     // セクション要素を取得
     const sectionElements = document.querySelectorAll(
-      "section, [data-section]"
+      'section, [data-section]'
     );
     if (sectionElements.length === 0) return;
 
@@ -139,7 +140,7 @@ const FixedSphere = () => {
 
     // セクションIDを取得（data-section属性またはid属性）
     const sectionId =
-      closestSection.getAttribute("data-section") ||
+      closestSection.getAttribute('data-section') ||
       closestSection.id ||
       `section${Array.from(sectionElements).indexOf(closestSection) + 1}`;
 
@@ -158,7 +159,7 @@ const FixedSphere = () => {
           y: sectionConfig.position[1],
           z: sectionConfig.position[2],
           duration: 1.5,
-          ease: "ease",
+          ease: 'ease',
         });
 
         if (sectionConfig.scale !== undefined) {
@@ -167,7 +168,7 @@ const FixedSphere = () => {
             y: sectionConfig.scale,
             z: sectionConfig.scale,
             duration: 1.5,
-            ease: "ease",
+            ease: 'ease',
           });
         }
       }
@@ -178,7 +179,7 @@ const FixedSphere = () => {
           gsap.to(materialRef.current, {
             uOpacity: sectionConfig.opacity,
             duration: 1.5,
-            ease: "ease",
+            ease: 'ease',
           });
         }
 
@@ -186,7 +187,7 @@ const FixedSphere = () => {
           gsap.to(materialRef.current, {
             uDeepPurple: sectionConfig.deepPurple,
             duration: 1.5,
-            ease: "ease",
+            ease: 'ease',
           });
         }
       }
@@ -221,15 +222,15 @@ const FixedSphere = () => {
     gsap.to(meshRef.current.rotation, {
       x: parseFloat(normalized) * Math.PI,
       duration: 4, // アニメーション時間を長くして慣性を持たせる
-      ease: "ease", // より緩やかなイージング
+      ease: 'ease', // より緩やかなイージング
     });
 
     // シェーダーユニフォームの更新 - easedNormalizedを使用（セクション固有の設定がない場合のみ）
     for (const key in settings) {
       // セクション固有の設定（opacity, deepPurple）以外のパラメータのみ更新
       if (
-        key !== "uOpacity" &&
-        key !== "uDeepPurple" &&
+        key !== 'uOpacity' &&
+        key !== 'uDeepPurple' &&
         settings[key].start !== settings[key].end &&
         materialRef.current
       ) {
@@ -239,7 +240,7 @@ const FixedSphere = () => {
             settings[key].start +
             easedNormalized * (settings[key].end - settings[key].start),
           duration: 2.4, // アニメーション時間を長くして慣性を持たせる
-          ease: "ease", // より強いイージング
+          ease: 'ease', // より強いイージング
         });
       }
     }
@@ -285,7 +286,7 @@ const FixedSphere = () => {
         uDeepPurple: settings.uDeepPurple.start,
         uOpacity: settings.uOpacity.start,
         duration: 1.5,
-        ease: "power2.out",
+        ease: 'power2.out',
       });
     }
 
@@ -317,8 +318,8 @@ const FixedSphere = () => {
         initialSection.scale !== undefined
           ? initialSection.scale
           : window.innerWidth < window.innerHeight
-          ? 0.75
-          : 1;
+            ? 0.75
+            : 1;
 
       // 少し遅延させてアニメーションを開始（初期レンダリングの問題を回避）
       setTimeout(() => {
@@ -328,7 +329,7 @@ const FixedSphere = () => {
             y: targetScale,
             z: targetScale,
             duration: 1.2, // アニメーション時間
-            ease: "elastic.out(1, 0.5)", // 弾力のあるアニメーション
+            ease: 'elastic.out(1, 0.5)', // 弾力のあるアニメーション
             onComplete: () => {
               setInitialAnimationComplete(true);
             },
@@ -338,15 +339,15 @@ const FixedSphere = () => {
     }
 
     // イベントリスナーの追加
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
 
     // 初期状態でもアニメーションを一度実行
     updateScrollAnimations();
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -361,10 +362,7 @@ const FixedSphere = () => {
   return (
     <>
       {/* 初期スケールを0に設定して、アニメーション前のチラつきを防止 */}
-      <mesh
-        ref={meshRef}
-        scale={[0, 0, 0]}
-      >
+      <mesh ref={meshRef} scale={[0, 0, 0]}>
         <icosahedronGeometry args={[1, subdivisionLevel]} />
         {/* @ts-expect-error - cubeMaterial is defined in cubeMaterial.ts */}
         <cubeMaterial ref={materialRef} />

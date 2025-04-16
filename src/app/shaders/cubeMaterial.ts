@@ -1,5 +1,5 @@
-import { shaderMaterial } from "@react-three/drei";
-import * as THREE from "three";
+import { shaderMaterial } from '@react-three/drei';
+import type * as THREE from 'three';
 
 // シェーダーファイルを文字列として読み込む
 const vertexShader = `
@@ -198,7 +198,7 @@ export const CubeMaterial = shaderMaterial(
 );
 
 // モジュール拡張を使用した型定義
-declare module "@react-three/fiber" {
+declare module '@react-three/fiber' {
   interface ThreeElements {
     cubeMaterial: {
       new (): CubeMaterialType;

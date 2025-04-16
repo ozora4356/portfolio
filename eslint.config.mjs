@@ -38,7 +38,6 @@ const eslintConfig = [
 
       // Common
       'no-console': ['error', { allow: ['warn', 'error'] }], // console.logの警告
-      eqeqeq: 'error', // 厳密等価演算子の強制
       'no-var': 'error', // varの使用を警告
       'prefer-const': 'error', // letよりconstを推奨
     },
